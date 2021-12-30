@@ -26,7 +26,6 @@ const ToppingsStyle = styled.div`
 `;
 
 const countPizzaInToppings = (pizzas) => {
-  console.log('eval');
   const counts = pizzas
     .map((pizza) => pizza.toppings)
     .flat()
@@ -67,24 +66,22 @@ export default function ToppingsFilter({ activeTopping }) {
     pizzas: { nodes: pizzas },
   } = data;
 
-  const pizzaToppingCounts = useMemo(() => countPizzaInToppings(pizzas), [
-    pizzas,
-  ]);
+  const pizzaToppingCounts = useMemo(
+    () => countPizzaInToppings(pizzas),
+    [pizzas]
+  );
   return (
     <ToppingsStyle>
       <Link to="/pizzas">
         <span className="name">All</span>
         <span className="count">{pizzas.length}</span>
       </Link>
-      {pizzaToppingCounts.map((topping) => {
-        console.log('render');
-        return (
-          <Link to={`/topping/${topping.name}`} key={topping.id}>
-            <span className="name">{topping.name}</span>
-            <span className="count">{topping.count}</span>
-          </Link>
-        );
-      })}
+      {pizzaToppingCounts.map((topping) => (
+        <Link to={`/topping/${topping.name}`} key={topping.id}>
+          <span className="name">{topping.name}</span>
+          <span className="count">{topping.count}</span>
+        </Link>
+      ))}
     </ToppingsStyle>
   );
 }

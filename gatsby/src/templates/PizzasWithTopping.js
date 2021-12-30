@@ -2,6 +2,7 @@ import { graphql, Link } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 import ToppingsFilter from '../components/ToppingsFilter';
 
 const PizzaGridStyles = styled.div`
@@ -73,6 +74,13 @@ export default function PizzasWithTopping({
 }) {
   return (
     <>
+      <SEO
+        title={
+          pageContext.topping
+            ? `Pizzas with ${pageContext.topping}`
+            : 'All Pizzas'
+        }
+      />
       <ToppingsFilter activeTopping={pageContext.name} />
       <PizzaGridStyles>
         {pizzas.map((pizza) => (

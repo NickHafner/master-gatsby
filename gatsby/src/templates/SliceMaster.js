@@ -2,10 +2,11 @@ import { graphql } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 export const q = graphql`
   query($slug: String!) {
-    sanityPerson(slug: { current: { eq: $slug } }) {
+    person: sanityPerson(slug: { current: { eq: $slug } }) {
       name
       description
       image {
@@ -24,9 +25,15 @@ const Style = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 4rem;
   grid-auto-rows: auto auto 500px;
-  h2,
+  h2 {
+    span {
+      background: var(--yellow);
+      padding: 0.2rem;
+      transform: rotate(-1.1deg);
+    }
+  }
   p {
-    margin: 0;
+    margin-top: 1rem;
   }
 `;
 
@@ -35,12 +42,17 @@ export default function SliceMaster({ data }) {
     person: { name, description, image },
   } = data;
   return (
-    <Style>
-      <GatsbyImage fluid={image.asset.fluid} />
-      <div>
-        <h2>{name}</h2>
-        <p>{description}</p>
-      </div>
-    </Style>
+    <>
+      <SEO title={`Slicemaster - ${name}`} image={image?.asset?.fluid?.src} />
+      <Style>
+        <GatsbyImage fluid={image.asset.fluid} />
+        <div>
+          <h2>
+            <span>{name}</span>
+          </h2>
+          <p>{description}</p>
+        </div>
+      </Style>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import GatsbyImage from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 import Pagination from '../components/Pagination';
+import SEO from '../components/SEO';
 
 export const q = graphql`
   query($skip: Int = 0, $pageSize: Int = 4) {
@@ -63,9 +64,10 @@ const MasterStyle = styled.div`
 
 export default function SliceMastersPage({ data, pageContext }) {
   const masters = data.people.nodes;
-  console.log(pageContext);
+
   return (
     <>
+      <SEO title={`Slicemasters - ${pageContext.currentPage || 1}`} />
       <Pagination
         pageSize={
           pageContext.pageSize || process.env.GATSBY_SLICEMASTERS_PAGINATION

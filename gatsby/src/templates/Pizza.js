@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import GatsbyImage from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 export const q = graphql`
   query($slug: String!) {
@@ -40,16 +41,19 @@ export default function PizzaPage({ data }) {
     pizza: { name, image, toppings },
   } = data;
   return (
-    <Style>
-      <GatsbyImage fluid={image.asset.fluid} />
-      <div>
-        <h2>{name}</h2>
-        <ul>
-          {toppings.map((topping) => (
-            <li key={topping.id}>{topping.name}</li>
-          ))}
-        </ul>
-      </div>
-    </Style>
+    <>
+      <SEO title={name} image={image?.asset?.fluid?.src} />
+      <Style>
+        <GatsbyImage fluid={image.asset.fluid} />
+        <div>
+          <h2>{name}</h2>
+          <ul>
+            {toppings.map((topping) => (
+              <li key={topping.id}>{topping.name}</li>
+            ))}
+          </ul>
+        </div>
+      </Style>
+    </>
   );
 }

@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import React from 'react';
 import { MdStar as icon, MdStar } from 'react-icons/md';
 import styled from 'styled-components';
+import SEO from '../components/SEO';
 
 export const q = graphql`
   query {
@@ -43,6 +44,7 @@ const BeerStyle = styled.div`
 export default function BeersPage({ data }) {
   return (
     <>
+      <SEO title="We have {data.allBeer.nodes.length} Beers Available." />
       <h2 className="center">
         We have {data.allBeer.nodes.length} Beers Available. Dine in Only!
       </h2>

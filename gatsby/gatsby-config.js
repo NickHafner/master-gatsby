@@ -10,6 +10,7 @@ export default {
   },
   plugins: [
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-react-helemt',
     {
       resolve: 'gatsby-source-sanity',
       options: {

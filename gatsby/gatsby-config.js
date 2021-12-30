@@ -9,8 +9,8 @@ export default {
     description: 'fake pizza place',
   },
   plugins: [
+    'gatsby-plugin-react-helmet',
     'gatsby-plugin-styled-components',
-    'gatsby-plugin-react-helemt',
     {
       resolve: 'gatsby-source-sanity',
       options: {
